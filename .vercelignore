@@ -1,0 +1,7 @@
+# Not needed to build the site on Vercel (sources and tooling output)
+/assets-src
+/deliverables
+/design
+/deploy
+/out
+/.playwright-mcp

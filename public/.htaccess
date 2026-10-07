@@ -1,0 +1,55 @@
+# Pozitiva Bar: Apache / LiteSpeed config for the static export (zemi.mk shared hosting).
+# Upload the CONTENTS of out/ (including this file) to the site's document root (usually public_html).
+
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # HTTPS only (enable once the SSL certificate is active in the hosting panel)
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # www.pozitivabar.mk -> pozitivabar.mk
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+  # /menu -> /menu/ (pages live in folders with an index.html)
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1/ [L,R=301]
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType image/avif .avif
+  AddType image/webp .webp
+  AddType video/mp4 .mp4
+  AddType application/manifest+json .webmanifest
+  AddType text/plain .txt
+  AddCharset utf-8 .html .txt .xml .webmanifest
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml application/xml application/javascript application/json image/svg+xml application/manifest+json
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Hashed build assets never change: cache for a year.
+  <If "%{REQUEST_URI} =~ m#^/_next/static/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  # Images, video, fonts, icons: 30 days.
+  <FilesMatch "\.(avif|webp|jpg|png|svg|ico|mp4|woff2)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  # Pages: always revalidate so menu/price edits show up immediately.
+  <FilesMatch "\.(html|txt|xml|webmanifest)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
