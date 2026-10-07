@@ -17,7 +17,12 @@ export function HeaderFrame({ children }: { children: React.ReactNode }) {
         const y = window.scrollY;
         setScrolled(y > 12);
         const focusInside = ref.current?.contains(document.activeElement);
-        if (y > 480 && y > last + 6 && !focusInside && !document.documentElement.dataset.navOpen) setHidden(true);
+        const navOpen = !!document.documentElement.dataset.navOpen;
+        const pin = document.querySelector<HTMLElement>("[data-header-pin]");
+        if (pin) {
+          // A page with its own sticky bar (the menu): stay tucked away while that bar is pinned.
+          setHidden(pin.getBoundingClientRect().top < (ref.current?.offsetHeight ?? 64) + 24 && !focusInside && !navOpen);
+        } else if (y > 480 && y > last + 6 && !focusInside && !navOpen) setHidden(true);
         else if (y < last - 6 || y < 480) setHidden(false);
         last = y;
       });
@@ -29,10 +34,6 @@ export function HeaderFrame({ children }: { children: React.ReactNode }) {
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
-
-  useEffect(() => {
-    document.documentElement.dataset.header = hidden ? "hidden" : "shown";
-  }, [hidden]);
 
   return (
     <header

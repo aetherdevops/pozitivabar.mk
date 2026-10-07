@@ -40,7 +40,7 @@ export function MenuList({ lang, currency, ask, empty, currencyNote, loyalty }: 
         const titles = [s.title.mk, s.title.en];
         return (
           <Fragment key={s.id}>
-            <section id={s.id} data-menu-section aria-labelledby={`${s.id}-title`} className="scroll-mt-[10.5rem] md:scroll-mt-36">
+            <section id={s.id} data-menu-section aria-labelledby={`${s.id}-title`} className="scroll-mt-36 md:scroll-mt-24">
               <div className="flex items-end justify-between gap-4 border-b-2 border-ink pb-3">
                 <h2 id={`${s.id}-title`} className="font-display text-[clamp(1.6rem,3vw,2.25rem)] font-bold tracking-tight">
                   {s.title[lang]}

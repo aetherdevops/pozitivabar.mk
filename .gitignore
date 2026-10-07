@@ -45,3 +45,5 @@ next-env.d.ts
 /design/shots/
 /design/lh-*.json
 /deploy/
+
+.vercel

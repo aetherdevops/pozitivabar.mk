@@ -405,16 +405,16 @@ video {
 
 /* ---------- Menu page ---------- */
 .menu-bar {
-  top: 4rem;
-  transition: top 300ms ease;
-}
-@media (min-width: 1024px) {
-  .menu-bar {
-    top: 4.5rem;
-  }
-}
-:root[data-header="hidden"] .menu-bar {
   top: 0;
+}
+.tab-rail[data-edge="right"] {
+  mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+}
+.tab-rail[data-edge="left"] {
+  mask-image: linear-gradient(to left, #000 calc(100% - 28px), transparent);
+}
+.tab-rail[data-edge="both"] {
+  mask-image: linear-gradient(to right, transparent, #000 28px, #000 calc(100% - 28px), transparent);
 }
 .menu-item {
   border-radius: 0.75rem;

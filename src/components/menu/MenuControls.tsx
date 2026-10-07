@@ -27,6 +27,13 @@ const ALL_IDS = MENU.map((s) => s.id);
 const TOTAL = MENU.reduce((n, s) => n + s.items.length, 0);
 const reduceMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/** Fade the tab rail's edge(s) where more tabs are hidden off-screen. */
+function markEdges(list: HTMLElement) {
+  const left = list.scrollLeft > 2;
+  const right = list.scrollLeft + list.clientWidth < list.scrollWidth - 2;
+  list.dataset.edge = left && right ? "both" : left ? "left" : right ? "right" : "none";
+}
+
 /** Wraps the first match in <mark>, built from DOM nodes (no innerHTML). */
 function highlight(el: HTMLElement, needles: string[]) {
   const text = el.dataset.text ?? (el.dataset.text = el.textContent ?? "");
@@ -51,6 +58,7 @@ export function MenuControls({ lang, labels }: { lang: Lang; labels: ControlLabe
   const tabsRef = useRef<HTMLUListElement>(null);
   const pillRef = useRef<HTMLSpanElement>(null);
   const spinTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const jumping = useRef(false);
 
   function applyFilter(q: string) {
     const needles = needlesFor(q);
@@ -89,6 +97,7 @@ export function MenuControls({ lang, labels }: { lang: Lang; labels: ControlLabe
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) => {
+        if (jumping.current) return;
         for (const e of entries) if (e.isIntersecting) setActive(e.target.id);
       },
       { rootMargin: "-35% 0px -60% 0px" },
@@ -111,7 +120,30 @@ export function MenuControls({ lang, labels }: { lang: Lang; labels: ControlLabe
     pill.style.transform = `translateX(${tab.offsetLeft}px)`;
     pill.style.opacity = "1";
     list.scrollTo({ left: tab.offsetLeft - list.clientWidth / 2 + tab.offsetWidth / 2, behavior: reduceMotion() ? "auto" : "smooth" });
+    markEdges(list);
   }, [active, visible]);
+
+  /** Tap on a category: scroll so its heading sits right under the pinned bar. */
+  function jump(e: React.MouseEvent<HTMLAnchorElement>, id: string) {
+    const section = document.getElementById(id);
+    if (!section) return;
+    e.preventDefault();
+    setActive(id);
+    jumping.current = true;
+    const bar = document.querySelector<HTMLElement>(".menu-bar");
+    const top = section.getBoundingClientRect().top + window.scrollY - (bar?.offsetHeight ?? 0) - 16;
+    // Instant jump + a short fade-in of the section: a long smooth scroll through the whole menu
+    // looks busy on phones (and can checkerboard on slower ones).
+    window.scrollTo({ top, behavior: "auto" });
+    history.replaceState(null, "", `#${id}`);
+    if (!reduceMotion()) {
+      section.animate([{ opacity: 0.35, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }], {
+        duration: 280,
+        easing: "cubic-bezier(.22,1,.36,1)",
+      });
+    }
+    setTimeout(() => (jumping.current = false), 400);
+  }
 
   useEffect(
     () => () => {
@@ -156,6 +188,8 @@ export function MenuControls({ lang, labels }: { lang: Lang; labels: ControlLabe
 
   return (
     <>
+      {/* Marks where the bar pins; the header tucks away once it has (see HeaderFrame). */}
+      <div data-header-pin aria-hidden="true" />
       <div className="menu-bar sticky z-30 border-b border-line bg-bg/90 backdrop-blur-md">
         <div className="container-pz flex flex-col gap-2.5 py-3 md:flex-row md:items-center md:gap-4">
           <div className="flex items-center gap-2 md:contents">
@@ -198,16 +232,21 @@ export function MenuControls({ lang, labels }: { lang: Lang; labels: ControlLabe
           </div>
 
           <nav aria-label={labels.tabs} className="min-w-0 flex-1">
-            <ul ref={tabsRef} className="relative flex gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <ul
+              ref={tabsRef}
+              onScroll={(e) => markEdges(e.currentTarget)}
+              className="tab-rail relative flex gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
               <span
                 ref={pillRef}
                 aria-hidden="true"
-                className="absolute left-0 top-0 h-full rounded-full bg-ink opacity-0 transition-[transform,width] duration-300 ease-[var(--ease-soft)]"
+                className="absolute left-0 top-0 h-full rounded-full bg-ink opacity-0 transition-[transform,width] duration-250 ease-[var(--ease-soft)]"
               />
               {MENU.filter((s) => visible.includes(s.id)).map((s) => (
                 <li key={s.id} className="shrink-0">
                   <a
                     href={`#${s.id}`}
+                    onClick={(e) => jump(e, s.id)}
                     data-tab={s.id}
                     aria-current={active === s.id ? "true" : undefined}
                     className="relative z-10 inline-flex min-h-11 items-center whitespace-nowrap rounded-full px-4 text-[0.95rem] font-semibold text-ink-soft transition-colors duration-300 hover:text-ink aria-[current=true]:text-bg"
