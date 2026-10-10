@@ -1,4 +1,4 @@
-import { ArrowRight, Coffee, Martini, Star } from "@phosphor-icons/react/ssr";
+import { ArrowRight, Coffee, MapPin, Martini, Star } from "@phosphor-icons/react/ssr";
 import { COPY } from "@/content/copy";
 import { SITE } from "@/content/site";
 import { paths, type Lang } from "@/lib/i18n";
@@ -20,27 +20,35 @@ export function Hero({ lang }: { lang: Lang }) {
 
       <div className="container-pz grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-10">
         <div className="min-w-0 lg:col-span-7">
-          <p className="text-kicker flex flex-wrap items-center gap-x-3 gap-y-1 text-gold-ink">
-            <span className="inline-flex items-center gap-1.5 [:root[data-theme=night]_&]:opacity-55">
-              <Coffee aria-hidden weight="bold" className="size-4" />
-              {c.theme.day}
-            </span>
-            <span aria-hidden="true">·</span>
-            <span className="inline-flex items-center gap-1.5 [:root:not([data-theme=night])_&]:opacity-55">
-              <Martini aria-hidden weight="bold" className="size-4" />
-              {c.theme.night}
-            </span>
-          </p>
-
-          <h1 id="hero-title" className="text-hero mt-6 text-ink">
-            {words.map((w, i) => (
-              <span key={i}>
-                <span className="word-rise" style={{ "--i": i } as React.CSSProperties}>
-                  {w}
-                </span>
-                {i < words.length - 1 ? " " : null}
+          {/* The kicker is part of the H1 so the heading says what and where (кафе бар, коктел бар, Скопје),
+              not only the slogan. Stacked on phones, one dotted row from md up. */}
+          <h1 id="hero-title" className="text-ink">
+            <span className="text-kicker flex flex-col gap-y-2 text-gold-ink md:flex-row md:flex-wrap md:items-center md:gap-x-3">
+              <span className="inline-flex items-center gap-1.5 [:root[data-theme=night]_&]:opacity-55">
+                <Coffee aria-hidden weight="bold" className="size-4" />
+                {h.kickerDay}
+              </span>{" "}
+              <span aria-hidden="true" className="hidden md:inline">·</span>{" "}
+              <span className="inline-flex items-center gap-1.5 [:root:not([data-theme=night])_&]:opacity-55">
+                <Martini aria-hidden weight="bold" className="size-4" />
+                {h.kickerNight}
+              </span>{" "}
+              <span aria-hidden="true" className="hidden md:inline">·</span>{" "}
+              <span className="inline-flex items-center gap-1.5">
+                <MapPin aria-hidden weight="bold" className="size-4" />
+                {h.kickerCity}
               </span>
-            ))}
+            </span>{" "}
+            <span className="text-hero mt-6 block">
+              {words.map((w, i) => (
+                <span key={i}>
+                  <span className="word-rise" style={{ "--i": i } as React.CSSProperties}>
+                    {w}
+                  </span>
+                  {i < words.length - 1 ? " " : null}
+                </span>
+              ))}
+            </span>
           </h1>
 
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">

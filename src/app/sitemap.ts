@@ -6,7 +6,7 @@ export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const abs = (p: string) => `${SITE.url}${p}`;
-  const lastModified = new Date("2026-10-07");
+  const lastModified = new Date("2026-10-10");
   return (["home", "menu"] as const).flatMap((page) => {
     const languages = { mk: abs(paths[page]("mk")), en: abs(paths[page]("en")), "x-default": abs(paths[page]("mk")) };
     return (["mk", "en"] as const).map((lang) => ({

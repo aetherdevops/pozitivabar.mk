@@ -15,7 +15,8 @@ export function barSchema(lang: Lang) {
     "@type": ["BarOrPub", "CafeOrCoffeeShop"],
     "@id": BAR_ID,
     name: SITE.name[lang],
-    alternateName: [SITE.name.mk, SITE.name.en, "Pozitiva bar"].filter((n) => n !== SITE.name[lang]),
+    // "Позитива" alone is how the sign and the logo wordmark read; Latin spellings for Latin-script searches.
+    alternateName: [SITE.name.mk, SITE.name.en, "Позитива", "Pozitiva", "Pozitiva bar"].filter((n) => n !== SITE.name[lang]),
     description: c.meta.homeDescription,
     slogan: c.footer.tagline,
     url: abs(paths.home(lang)),
@@ -94,7 +95,7 @@ export function menuSchema(lang: Lang) {
   return {
     "@type": "Menu",
     "@id": `${url}#menu`,
-    name: COPY[lang].menu.title,
+    name: `${COPY[lang].nav.menu}, ${SITE.name[lang]}`,
     url,
     inLanguage: lang,
     hasMenuSection: MENU.map((s) => ({

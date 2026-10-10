@@ -40,8 +40,11 @@ export function MenuPage({ lang }: { lang: Lang }) {
                   </li>
                 </ol>
               </nav>
-              <h1 id="menu-title" className="text-hero mt-5">
-                <span className="word-rise">{m.title}</span>
+              <h1 id="menu-title" className="mt-5">
+                <span className="text-kicker block text-gold-ink">{m.kicker}</span>{" "}
+                <span className="text-hero mt-4 block">
+                  <span className="word-rise">{m.title}</span>
+                </span>
               </h1>
               <p className="mt-5 max-w-xl text-lg text-ink-soft">{m.sub}</p>
             </div>

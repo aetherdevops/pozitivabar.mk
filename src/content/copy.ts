@@ -27,11 +27,14 @@ const mk = {
   theme: { dayShort: "Ден", nightShort: "Ноќ", day: "Кафе преку ден", night: "Бар преку ноќ" },
   status: { open: "Отворено сега", closed: "Сега е затворено", until: "до 24:00", opensAt: "отвораме во 08:00" },
   hero: {
+    kickerDay: "Кафе бар преку ден",
+    kickerNight: "Коктел бар преку ноќ",
+    kickerCity: "Скопје",
     title: "Не служиме лошо расположение.",
     subDay:
-      "Фредо на терасата, еспресо на шанкот и маса за твоето друштво. Ѓорче Петров 3/1, секој ден од 08 часот.",
+      "Фредо на терасата, еспресо на шанкот и маса за твоето друштво. Ѓорче Петров 3/1, Скопје, секој ден од 08 часот.",
     subNight:
-      "Кога ќе зајде сонцето, шанкот станува бар: signature коктели, Aperol и ладно Скопско. Ѓорче Петров 3/1, до полноќ.",
+      "Кога ќе зајде сонцето, шанкот станува бар: signature коктели, Aperol и ладно Скопско. Ѓорче Петров 3/1, Скопје, до полноќ.",
     fauxItem: "Лошо расположение",
     fauxPrice: "0 ден",
     stamp: "НЕ СЕ СЛУЖИ",
@@ -143,6 +146,10 @@ const mk = {
       { q: "Каде се наоѓа Позитива Бар?", a: "На улица Ѓорче Петров 3/1 во Скопје (1000). Имаме шанк внатре и тераса надвор." },
       { q: "Кое е работното време?", a: "Отворени сме секој ден од 08:00 до 24:00 часот." },
       {
+        q: "Дали Позитива Бар е кафуле или коктел бар?",
+        a: "И двете. Преку ден сме кафуле со тераса за еспресо и фредо, а кога ќе зајде сонцето шанкот станува коктел бар до полноќ.",
+      },
+      {
         q: "Што служите?",
         a: "Преку ден еспресо, фредо, лате, капучино, чај и топло чоколадо. Преку ноќ signature и класични коктели, пиво, вино и жестоки пијалоци.",
       },
@@ -167,12 +174,13 @@ const mk = {
     hoursValue: "Секој ден 08:00 до 24:00",
     contact: "Контакт",
     pages: "Страници",
-    rights: "© 2026 Позитива Бар. Сите права задржани.",
+    rights: "© 2026 Позитива Бар (Pozitiva Bar), Скопје. Сите права задржани.",
     top: "Нагоре",
   },
   menu: {
-    title: "Мени",
-    sub: "Цените се во денари. Кафе од 08 часот, коктели до полноќ.",
+    kicker: "Позитива Бар, Скопје",
+    title: "Мени и цени",
+    sub: "Кафе, коктели, пиво, вино и жестоки пијалоци, со цени во денари. Кафе од 08 часот, коктели до полноќ.",
     searchLabel: "Пребарај пијалок",
     searchPlaceholder: "фредо, џин, Aperol...",
     clear: "Исчисти пребарување",
@@ -227,11 +235,14 @@ const en: Copy = {
   theme: { dayShort: "Day", nightShort: "Night", day: "Café by day", night: "Bar by night" },
   status: { open: "Open now", closed: "Closed right now", until: "until midnight", opensAt: "opens at 8 am" },
   hero: {
+    kickerDay: "Café by day",
+    kickerNight: "Cocktail bar by night",
+    kickerCity: "Skopje",
     title: "We don't serve bad moods.",
     subDay:
-      "Freddo on the terrace, espresso at the bar and a table for your crew. Gjorche Petrov 3/1, every day from 8 am.",
+      "Freddo on the terrace, espresso at the bar and a table for your crew. Gjorche Petrov 3/1, Skopje, every day from 8 am.",
     subNight:
-      "When the sun goes down, the coffee bar turns cocktail bar: signature drinks, Aperol and ice-cold Skopsko. Gjorche Petrov 3/1, until midnight.",
+      "When the sun goes down, the coffee bar turns cocktail bar: signature drinks, Aperol and ice-cold Skopsko. Gjorche Petrov 3/1, Skopje, until midnight.",
     fauxItem: "Bad mood",
     fauxPrice: "0 MKD",
     stamp: "NOT SERVED",
@@ -337,6 +348,10 @@ const en: Copy = {
       { q: "Where is Pozitiva Bar?", a: "At Gjorche Petrov 3/1 in Skopje (1000), North Macedonia. There's a bar inside and a terrace outside." },
       { q: "What are the opening hours?", a: "We're open every day from 8 am to midnight." },
       {
+        q: "Is Pozitiva Bar a café or a cocktail bar?",
+        a: "Both. By day we're a café with a terrace for espresso and freddo, and when the sun goes down the bar turns into a cocktail bar until midnight.",
+      },
+      {
         q: "What do you serve?",
         a: "By day: espresso, freddo, latte, cappuccino, tea and hot chocolate. By night: signature and classic cocktails, beer, wine and spirits.",
       },
@@ -361,12 +376,13 @@ const en: Copy = {
     hoursValue: "Every day, 8 am to midnight",
     contact: "Contact",
     pages: "Pages",
-    rights: "© 2026 Pozitiva Bar. All rights reserved.",
+    rights: "© 2026 Pozitiva Bar (Позитива Бар), Skopje. All rights reserved.",
     top: "Back to top",
   },
   menu: {
-    title: "Menu",
-    sub: "Prices in Macedonian denars (MKD). Coffee from 8 am, cocktails until midnight.",
+    kicker: "Pozitiva Bar, Skopje",
+    title: "Menu & prices",
+    sub: "Coffee, cocktails, beer, wine and spirits, with prices in Macedonian denars (MKD). Coffee from 8 am, cocktails until midnight.",
     searchLabel: "Search drinks",
     searchPlaceholder: "freddo, gin, Aperol...",
     clear: "Clear search",
