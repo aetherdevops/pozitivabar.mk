@@ -31,7 +31,7 @@ h1{margin-top:6mm;font-family:Unbounded;font-weight:700;font-size:15pt;letter-sp
 <div class="qr">${qr}</div>
 <h1>Скенирај за менито</h1>
 <p class="en">Scan for the menu</p>
-<div class="foot"><b>Секое 10-то кафе е на нас.</b> Every 10th coffee is on us.<br>pozitivabar.mk · секој ден 08 до 24 ч</div>
+<div class="foot"><b>Секое 10-то кафе е на нас.</b> Every 10th coffee is on us.<br>pozitivabar.mk · секој ден 08:00 до 00:00</div>
 </body></html>`;
 
 const browser = await chromium.launch();

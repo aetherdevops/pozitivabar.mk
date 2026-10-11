@@ -23,7 +23,7 @@ export const SITE = {
   geo: { lat: 42.0069912, lng: 21.3663834 },
   // Same hours every day.
   opens: "08:00",
-  closes: "24:00",
+  closes: "00:00",
   instagram: "https://www.instagram.com/pozitivabar/",
   instagramHandle: "@pozitivabar",
   maps: "https://maps.google.com/?cid=5061748113390125551",

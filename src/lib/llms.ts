@@ -11,7 +11,7 @@ function header() {
   return [
     `# ${SITE.name.mk} (${SITE.name.en})`,
     "",
-    `> Neighbourhood café by day and cocktail bar by night at ${SITE.address.street.mk} (${SITE.address.street.en}), ${SITE.address.postalCode} Skopje, North Macedonia. Open every day from ${SITE.opens} to ${SITE.closes}. Opened September 2026. House motto: "${COPY.mk.hero.title.replace(/\.$/, "")}" (${COPY.en.hero.title.replace(/\.$/, "")}).`,
+    `> Neighbourhood café by day and cocktail bar by night at ${SITE.address.street.mk} (${SITE.address.street.en}), ${SITE.address.postalCode} Skopje, North Macedonia. Open every day from ${SITE.opens} to ${SITE.closes} (midnight). Opened September 2026. House motto: "${COPY.mk.hero.title.replace(/\.$/, "")}" (${COPY.en.hero.title.replace(/\.$/, "")}).`,
   ];
 }
 
@@ -20,7 +20,7 @@ function keyFacts() {
   return [
     "## Key facts",
     `- Address: ${SITE.address.street.mk}, ${SITE.address.postalCode} ${SITE.address.city.mk}, North Macedonia (${SITE.address.street.en}, ${SITE.address.city.en}). Coordinates ${SITE.geo.lat}, ${SITE.geo.lng}.`,
-    `- Opening hours: Monday to Sunday, ${SITE.opens} to ${SITE.closes}.`,
+    `- Opening hours: Monday to Sunday, ${SITE.opens} to ${SITE.closes} (midnight).`,
     `- Phone: ${SITE.phoneIntl}`,
     `- Instagram: ${SITE.instagram}`,
     `- Google Maps: ${SITE.maps} (rated ${SITE.rating.value} from ${SITE.rating.count} reviews, October 2026)`,
