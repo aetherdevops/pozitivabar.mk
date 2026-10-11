@@ -32,6 +32,14 @@ export const SITE = {
   loyalty: "https://take.cards/lHclf",
   rating: { value: 4.5, count: 14 },
   openedIn: "2026-09",
+  // Confirmed by the owner 2026-10-11. Reservations and smoking are unconfirmed: keep them out.
+  amenities: [
+    { id: "wifi", mk: "Бесплатен Wi-Fi", en: "Free Wi-Fi" },
+    { id: "laptop", mk: "Погодно за работа со лаптоп", en: "Laptop friendly" },
+    { id: "terrace", mk: "Тераса", en: "Outdoor terrace seating" },
+    { id: "pets", mk: "Милениците се добредојдени", en: "Pets welcome" },
+    { id: "cards", mk: "Плаќање во готово или со картичка", en: "Cash and card payments accepted" },
+  ],
 } as const;
 
 export const OPEN_HOUR = 8;

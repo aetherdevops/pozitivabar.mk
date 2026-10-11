@@ -42,6 +42,16 @@ npm run build          # writes out/
 - **Google Business Profile**: the listing has no website today ("Add website"). Add
   `https://pozitivabar.mk` and the menu link `https://pozitivabar.mk/menu/`.
 - Instagram bio: link to `pozitivabar.mk` (currently a maps link).
+- Listings that AI assistants read. Use the exact same name, address, phone and `https://pozitivabar.mk`
+  everywhere, and list the same amenities (free Wi-Fi, terrace, pets welcome, cards accepted):
+  - **Bing Places** (bingplaces.com): import from Google Business Profile. Feeds ChatGPT search and Copilot.
+  - **Apple Business Connect** (businessconnect.apple.com): Apple Maps and Siri.
+  - **TripAdvisor** (tripadvisor.com/Owners): claim or add the listing.
+  - **Foursquare** (foursquare.com/venue/claim): its places data is licensed to many apps and assistants.
+- Ask happy guests for Google reviews: review count and recency are what assistants weigh most for
+  "best café / cocktail bar in Skopje" style questions.
+- After each deploy, check https://pozitivabar.mk/llms.txt and /llms-full.txt (generated from
+  `src/content`, so they follow menu and price edits automatically).
 
 ## 7. Print
 Only after step 5 passes: print `deliverables/qr/pozitiva-table-card-a6.pdf` (A6, 105 x 148 mm) or use

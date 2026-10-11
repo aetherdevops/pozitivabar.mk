@@ -7,6 +7,9 @@ ErrorDocument 404 /404.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  # AutoSSL / ACME domain validation must stay reachable over plain HTTP
+  RewriteRule ^\.well-known/ - [L]
+
   # HTTPS only (enable once the SSL certificate is active in the hosting panel)
   RewriteCond %{HTTPS} !=on
   RewriteCond %{HTTP:X-Forwarded-Proto} !=https

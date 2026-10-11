@@ -24,7 +24,16 @@ export function barSchema(lang: Lang) {
     telephone: SITE.phoneIntl,
     priceRange: "80–320 MKD",
     currenciesAccepted: "MKD",
+    paymentAccepted: "Cash, Credit Card, Debit Card",
     servesCuisine: lang === "mk" ? ["Кафе", "Коктели"] : ["Coffee", "Cocktails"],
+    amenityFeature: SITE.amenities
+      .filter((a) => a.id !== "cards")
+      .map((a) => ({ "@type": "LocationFeatureSpecification", name: a[lang], value: true })),
+    areaServed: { "@type": "City", name: SITE.address.city[lang] },
+    keywords:
+      lang === "mk"
+        ? "кафе бар Скопје, коктел бар Скопје, фредо, signature коктели, Ѓорче Петров, тераса, Wi-Fi"
+        : "café Skopje, cocktail bar Skopje, freddo espresso, signature cocktails, Gjorche Petrov, terrace, Wi-Fi",
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE.address.street[lang],

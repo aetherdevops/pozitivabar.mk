@@ -158,6 +158,15 @@ const mk = {
         q: "Кои се signature коктелите?",
         a: "Drunk Monkey, Parrot's Kiss, Mamacita, Forest Animal и Tropical Mirage, по 320 денари.",
       },
+      {
+        q: "Има ли Wi-Fi и може ли да се работи со лаптоп?",
+        a: "Да. Wi-Fi е бесплатен, а преку ден слободно седни со лаптоп, кафе и колку време ти треба.",
+      },
+      { q: "Може ли да се плати со картичка?", a: "Да, плаќањето може во готово или со картичка." },
+      {
+        q: "Има ли тераса и може ли со милениче?",
+        a: "Да. Имаме тераса надвор, а милениците се добредојдени.",
+      },
     ],
   },
   footer: {
@@ -351,6 +360,15 @@ const en: Copy = {
       {
         q: "What are the signature cocktails?",
         a: "Drunk Monkey, Parrot's Kiss, Mamacita, Forest Animal and Tropical Mirage, 320 MKD each.",
+      },
+      {
+        q: "Is there Wi-Fi, and can I work on a laptop?",
+        a: "Yes. The Wi-Fi is free, and during the day you're welcome to settle in with a laptop and a coffee for as long as you need.",
+      },
+      { q: "Can I pay by card?", a: "Yes, you can pay in cash or by card." },
+      {
+        q: "Is there a terrace, and can I bring my dog?",
+        a: "Yes. There's a terrace outside, and pets are welcome.",
       },
     ],
   },
